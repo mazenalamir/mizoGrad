@@ -175,6 +175,10 @@ window.Quarto = {
 <span class="menu-text">Example of use</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./index.html#acceleration"> 
+<span class="menu-text">Acceleration</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./index.html#citing"> 
 <span class="menu-text">Cite mizoGrad</span></a>
   </li>  
@@ -207,6 +211,7 @@ window.Quarto = {
   <li><a href="#returned-dictionary" id="toc-returned-dictionary" class="nav-link" data-scroll-target="#returned-dictionary">Returned dictionary</a></li>
   </ul></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example of use</a></li>
+  <li><a href="#acceleration" id="toc-acceleration" class="nav-link" data-scroll-target="#acceleration">Acceleration</a></li>
   <li><a href="#citing" id="toc-citing" class="nav-link" data-scroll-target="#citing">Citing mizoGrad</a></li>
   </ul>
 </nav>
@@ -560,6 +565,22 @@ value 0.000000000 normg=0.000 | alpha_min=-7.859 | alpha_max=-1.852
 solution:  [1.7020 -1.2326 -1.1696]
 best cost :  8.860672896017431e-21
 cpu =  0.0008881092071533203</code></pre>
+</section>
+<section id="acceleration" class="level2">
+<h2 class="anchored" data-anchor-id="acceleration">Acceleration</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="acceleration of the algorithm">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+acceleration of the algorithm
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (<strong>Nonlinear Model Predictive Control</strong> / <strong>Moving-Horizon Estimation</strong>), you might want to accelerate the evaluation of these function through compiled version of <code>CasaDi</code> or <code>PyTorch</code>.</p>
+</div>
+</div>
 </section>
 <section id="citing" class="level2">
 <h2 class="anchored" data-anchor-id="citing">Citing mizoGrad</h2>

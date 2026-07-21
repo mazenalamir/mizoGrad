@@ -207,6 +207,12 @@ best cost :  8.860672896017431e-21
 cpu =  0.0008881092071533203
 ```
 
+## Acceleration {#acceleration}
+
+:::{.callout-tip title="acceleration of the algorithm"}
+Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (**Nonlinear Model Predictive Control** / **Moving-Horizon Estimation**), you might want to accelerate the evaluation of these function through compiled version of `CasaDi` or `PyTorch`.
+:::
+
 ## Citing mizoGrad {#citing}
 
 

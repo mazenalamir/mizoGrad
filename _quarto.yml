@@ -17,6 +17,8 @@ website:
         text: "Syntax"
       - href: index.qmd#example
         text: "Example of use"
+      - href: index.qmd#acceleration
+        text: "Acceleration"
       - href: index.qmd#citing
         text: "Cite mizoGrad"
 
