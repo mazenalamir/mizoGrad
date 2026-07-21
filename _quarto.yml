@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "mizoGrad"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: index.qmd#problem
+        text: "Problem"
+      - href: index.qmd#features
+        text: "Features"
+      - href: index.qmd#syntax
+        text: "Syntax"
+      - href: index.qmd#example
+        text: "Example of use"
+      - href: index.qmd#citing
+        text: "Cite mizoGrad"
+
+# flatly, sketchy, pulse, sandstone, spacelab
+# superhero, united, yeti
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: true
+
+
+
+
