@@ -4,6 +4,7 @@ project:
 
 website:
   title: "mizoGrad"
+  site-url: https://www.mazenalamir.fr/mizoGrad/
   navbar:
     left:
       - href: index.qmd
