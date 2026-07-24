@@ -62,6 +62,10 @@ The following section provides the full list of input arguments
 
 The following list of arguments are used in the instantiation of `GradOptimizer` class. An instance of this class possesses a `solve` method that enables to solve the above mentioned problem @eq-problem.
 
+:::{.callout-warning title="Order of the decision variable in f and g"}
+Please notice that it is mandatory that **decision variable appears as the first argument in the formal definition of the cost function**.
+:::
+
 :::{.tbl-caption}
 | **Parameter**     | **Description**      | **Default**|
 |---|---------------|----:|

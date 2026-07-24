@@ -328,6 +328,19 @@ Provable convergence
 <section id="input-arguments" class="level3">
 <h3 class="anchored" data-anchor-id="input-arguments">Input arguments</h3>
 <p>The following list of arguments are used in the instantiation of <code>GradOptimizer</code> class. An instance of this class possesses a <code>solve</code> method that enables to solve the above mentioned problem <a href="#eq-problem" class="quarto-xref">Equation&nbsp;1</a>.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Order of the decision variable in f and g">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Order of the decision variable in f and g
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please notice that it is mandatory that <strong>decision variable appears as the first argument in the formal definition of the cost function</strong>.</p>
+</div>
+</div>
 <div class="tbl-caption">
 <table class="caption-top table">
 <caption>Input arguments for the <code>instantiation</code> of the <code>GradOptimizer</code> class.</caption>
