@@ -163,20 +163,12 @@ window.Quarto = {
 <span class="menu-text">Problem</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#features"> 
-<span class="menu-text">Features</span></a>
+    <a class="nav-link" href="./index.html#deterministic"> 
+<span class="menu-text">Determinisitic version</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./index.html#syntax"> 
-<span class="menu-text">Syntax</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#example"> 
-<span class="menu-text">Example of use</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html#acceleration"> 
-<span class="menu-text">Acceleration</span></a>
+    <a class="nav-link" href="./index.html#stochastic"> 
+<span class="menu-text">Stochastic version</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./index.html#citing"> 
@@ -198,21 +190,27 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#problem" id="toc-problem" class="nav-link active" data-scroll-target="#problem">Problem Statement</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Algorithm features</a>
+  <li><a href="#problem" id="toc-problem" class="nav-link active" data-scroll-target="#problem">Problem Statement</a>
   <ul class="collapse">
-  <li><a href="#the-gradient-step" id="toc-the-gradient-step" class="nav-link" data-scroll-target="#the-gradient-step">The gradient step</a></li>
-  <li><a href="#the-acceleration-step" id="toc-the-acceleration-step" class="nav-link" data-scroll-target="#the-acceleration-step">The acceleration step</a></li>
+  <li><a href="#deterministic-version" id="toc-deterministic-version" class="nav-link" data-scroll-target="#deterministic-version">Deterministic version</a></li>
+  <li><a href="#stochastic-version" id="toc-stochastic-version" class="nav-link" data-scroll-target="#stochastic-version">Stochastic version</a></li>
   </ul></li>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax of use</a>
+  <li><a href="#deterministic" id="toc-deterministic" class="nav-link" data-scroll-target="#deterministic">The <code>GradOptimizer</code> class</a>
   <ul class="collapse">
-  <li><a href="#input-arguments" id="toc-input-arguments" class="nav-link" data-scroll-target="#input-arguments">Input arguments</a></li>
-  <li><a href="#calling-the-solve-method" id="toc-calling-the-solve-method" class="nav-link" data-scroll-target="#calling-the-solve-method">Calling the solve method</a></li>
-  <li><a href="#returned-dictionary" id="toc-returned-dictionary" class="nav-link" data-scroll-target="#returned-dictionary">Returned dictionary</a></li>
-  </ul></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Algorithm features</a></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax of use</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example of use</a></li>
   <li><a href="#acceleration" id="toc-acceleration" class="nav-link" data-scroll-target="#acceleration">Acceleration</a></li>
-  <li><a href="#citing" id="toc-citing" class="nav-link" data-scroll-target="#citing">Citing mizoGrad</a></li>
+  </ul></li>
+  <li><a href="#stochastic" id="toc-stochastic" class="nav-link" data-scroll-target="#stochastic">The <code>StochasticGradOptimizer</code> class</a>
+  <ul class="collapse">
+  <li><a href="#input-arguments-1" id="toc-input-arguments-1" class="nav-link" data-scroll-target="#input-arguments-1">Input arguments</a></li>
+  <li><a href="#the-solve-method-of-stochasticgradoptimizer" id="toc-the-solve-method-of-stochasticgradoptimizer" class="nav-link" data-scroll-target="#the-solve-method-of-stochasticgradoptimizer">The solve method of <code>StochasticGradOptimizer</code></a></li>
+  <li><a href="#returned-solution" id="toc-returned-solution" class="nav-link" data-scroll-target="#returned-solution">Returned solution</a></li>
+  <li><a href="#example-of-use" id="toc-example-of-use" class="nav-link" data-scroll-target="#example-of-use">Example of use</a></li>
+  </ul></li>
+  <li><a href="#citing" id="toc-citing" class="nav-link" data-scroll-target="#citing">Citing mizoGrad (Deterministic Version)</a></li>
+  <li><a href="#citing" id="toc-citing" class="nav-link" data-scroll-target="#citing">Citing mizoGrad (Stochastic Version)</a></li>
   </ul>
 </nav>
     </div>
@@ -222,7 +220,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">mizoGrad</h1>
-<p class="subtitle lead">A module for extremely fast gradient-based optimization.</p>
+<p class="subtitle lead">A module for extremely fast gradient-based (stochastic) optimization.</p>
 </div>
 
 
@@ -272,9 +270,39 @@ window.Quarto = {
 \min_{x\in [\underline x, \bar x]}f(x, {\scriptsize \texttt{**kwargs}})
 \tag{1}\]</span></span></p>
 <p>where <span class="math inline">\(f\)</span> is a differentiable map, <span class="math inline">\(x\)</span> is the decision variable while <span class="math inline">\(\texttt{**kwargs}\)</span> is a list of keywords arguments that is necessary to define the cost function.</p>
+<section id="deterministic-version" class="level3">
+<h3 class="anchored" data-anchor-id="deterministic-version">Deterministic version</h3>
+<p>In its deterministic version, the dictionary of parameters kwargs is given and a deterministic cost is defined accordingly.</p>
 </section>
-<section id="features" class="level2">
-<h2 class="anchored" data-anchor-id="features">Algorithm features</h2>
+<section id="stochastic-version" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-version">Stochastic version</h3>
+<p>In the stochastic version, the fields associated to the <code>key</code> used in the instantiation of the solver is uncertain and hence, different formulation of a constrained stochastic optimization problems can be defined, namely:</p>
+<ul>
+<li><p><code>Expectation</code>-related: where the cost function is the expectation of the cost</p></li>
+<li><p><code>Value-at-Risk (VaR)</code>: where the cost function to be minimized is defined as the <span class="math inline">\(\alpha\)</span>-quantile of the cost function <span class="math inline">\(f(x,p)\)</span>.</p></li>
+<li><p><code>Conditional-Value-at-Risk (CVaR)</code>: where the cost to be minimized represents the expectation of values that go beyonf the <span class="math inline">\(\alpha\)</span>-quantile.</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Deterministic version is used in the stochastic version">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Deterministic version is used in the stochastic version
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is important to notice that the stochastic version of the algorithm leverages the acceleration features included in the determinisitc approach. This means that understanding the deterministic version’s parameters and options is mandatory for a better use of the stochastic version.</p>
+<p>In the next sections, the deterministiv version is first introduced before its use in the stochastic version is discussed.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="deterministic" class="level2">
+<h2 class="anchored" data-anchor-id="deterministic">The <code>GradOptimizer</code> class</h2>
+<p>This class implements the deterministic version and it is then used also in the stochastic version. The following section describes the main features of the deterministic algorithm that explains its high performance compared to other gradient-based algorithms.</p>
+<section id="features" class="level3">
+<h3 class="anchored" data-anchor-id="features">Algorithm features</h3>
 <p>The Gradient-based algorithm used in the <code>mizoGrad</code> module is fully described in the <a href="https://arxiv.org/abs/2607.14600">paper</a>. This section just highlights some main features that distinguishes it from existing alternatives.</p>
 <p>The algorithm uses three main mechanisms that makes it outstanding, namely:</p>
 <ul>
@@ -283,8 +311,8 @@ window.Quarto = {
 <li>Unlike the standard implementation of the Nesterov acceleration step, <code>mizoGrad</code> uses <strong>another line search</strong> along the acceleration path. Moreover, this line search allow for <strong>negative</strong> steps.</li>
 </ul>
 <p>This is schematically shown in the following Figures:</p>
-<section id="the-gradient-step" class="level3">
-<h3 class="anchored" data-anchor-id="the-gradient-step">The gradient step</h3>
+<section id="the-gradient-step" class="level4">
+<h4 class="anchored" data-anchor-id="the-gradient-step">The gradient step</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/gradient_step.png" class="img-fluid figure-img" style="width:80.0%"></p>
@@ -292,8 +320,8 @@ window.Quarto = {
 </figure>
 </div>
 </section>
-<section id="the-acceleration-step" class="level3">
-<h3 class="anchored" data-anchor-id="the-acceleration-step">The acceleration step</h3>
+<section id="the-acceleration-step" class="level4">
+<h4 class="anchored" data-anchor-id="the-acceleration-step">The acceleration step</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/acceleration_step.png" class="img-fluid figure-img" style="width:80.0%"></p>
@@ -315,8 +343,8 @@ Provable convergence
 </div>
 </section>
 </section>
-<section id="syntax" class="level2">
-<h2 class="anchored" data-anchor-id="syntax">Syntax of use</h2>
+<section id="syntax" class="level3">
+<h3 class="anchored" data-anchor-id="syntax">Syntax of use</h3>
 <p>In order to use the module, the user need to provide three **mandatory arguments*, namely:</p>
 <ul>
 <li>The python function for the cost function</li>
@@ -325,8 +353,8 @@ Provable convergence
 </ul>
 <p>All the other parameters corresponds to some default values. In particular, if non <code>xmin</code> and <code>xmax</code> arguments are provided, the problem is considered to be unconstrained.</p>
 <p>The following section provides the full list of input arguments</p>
-<section id="input-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="input-arguments">Input arguments</h3>
+<section id="input-arguments" class="level4">
+<h4 class="anchored" data-anchor-id="input-arguments">Input arguments</h4>
 <p>The following list of arguments are used in the instantiation of <code>GradOptimizer</code> class. An instance of this class possesses a <code>solve</code> method that enables to solve the above mentioned problem <a href="#eq-problem" class="quarto-xref">Equation&nbsp;1</a>.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Order of the decision variable in f and g">
 <div class="callout-header d-flex align-content-center">
@@ -421,8 +449,8 @@ Order of the decision variable in f and g
 </table>
 </div>
 </section>
-<section id="calling-the-solve-method" class="level3">
-<h3 class="anchored" data-anchor-id="calling-the-solve-method">Calling the solve method</h3>
+<section id="calling-the-solve-method" class="level4">
+<h4 class="anchored" data-anchor-id="calling-the-solve-method">Calling the solve method</h4>
 <p>The solve method is called on an instance of the <code>GradOptimizer</code> class with the following arguments</p>
 <ul>
 <li><code>x0</code>: The initial guess</li>
@@ -432,8 +460,8 @@ Order of the decision variable in f and g
 <li><code>display</code>: Boolean for the display or not of intermediate results</li>
 </ul>
 </section>
-<section id="returned-dictionary" class="level3">
-<h3 class="anchored" data-anchor-id="returned-dictionary">Returned dictionary</h3>
+<section id="returned-dictionary" class="level4">
+<h4 class="anchored" data-anchor-id="returned-dictionary">Returned dictionary</h4>
 <p>The solver returns a dictionary with the following fields:</p>
 <div class="tbl-caption">
 <table class="caption-top table">
@@ -491,8 +519,8 @@ Order of the decision variable in f and g
 </div>
 </section>
 </section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example of use</h2>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example of use</h3>
 <p>This script gives a complete example of use of the <code>mizoGrad</code> module</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mizoGrad <span class="im">import</span> GradOptimizer</span>
@@ -579,34 +607,328 @@ solution:  [1.7020 -1.2326 -1.1696]
 best cost :  8.860672896017431e-21
 cpu =  0.0008881092071533203</code></pre>
 </section>
-<section id="acceleration" class="level2">
-<h2 class="anchored" data-anchor-id="acceleration">Acceleration</h2>
-<div class="callout callout-style-default callout-tip callout-titled" title="acceleration of the algorithm">
+<section id="acceleration" class="level3">
+<h3 class="anchored" data-anchor-id="acceleration">Acceleration</h3>
+<div class="callout callout-style-default callout-tip callout-titled" title="Acceleration of the function and gradient call">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-acceleration of the algorithm
+Acceleration of the function and gradient call
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (<strong>Nonlinear Model Predictive Control</strong> / <strong>Moving-Horizon Estimation</strong>), you might want to accelerate the evaluation of these function through compiled version of <code>CasaDi</code> or <code>PyTorch</code>.</p>
+<p>Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (<strong>Nonlinear Model Predictive Control</strong> / <strong>Moving-Horizon Estimation</strong>), you might want to accelerate the evaluation of these function through compiled version of <code>CasaDi</code>.</p>
 </div>
 </div>
 </section>
+</section>
+<section id="stochastic" class="level2">
+<h2 class="anchored" data-anchor-id="stochastic">The <code>StochasticGradOptimizer</code> class</h2>
+<p>The basic class <code>StochasticGradOptimizer</code> is a child class of the previous one and is described in detail in this <a href="http://arxiv.org/abs/2609.07427">paper</a>. As such, all the input argument described above are also needed for this class in addition to some more arguments that controls the way the stochastic aspect of the problem is handled. This is the reason why for the sake of convenience, the dictionary containing the default values that might be used in the call can be obtained through the command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mizoGrad <span class="im">import</span> dicGradDefault</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the default dictionary for the deterministic solver</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dicGrad <span class="op">=</span> dicGradDefault</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the dictionary with the mandatory values </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>dicGrad.update(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        f<span class="op">=</span> ...,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        g<span class="op">=</span> ...,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        nx<span class="op">=</span> ...,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        xmin<span class="op">=</span> ...,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        xmax<span class="op">=</span> ...,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The full list of arguments for the instantiation of the <code>StochasticGradOptimizer</code> class are described in the following section.</p>
+<section id="input-arguments-1" class="level3">
+<h3 class="anchored" data-anchor-id="input-arguments-1">Input arguments</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Type</th>
+<th style="text-align: center;">Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dicGradOptimizer</code></td>
+<td>dictionary</td>
+<td style="text-align: center;">—</td>
+<td>Dictionary representing the input arguments of the deterministic version</td>
+</tr>
+<tr class="even">
+<td><code>key</code></td>
+<td>str</td>
+<td style="text-align: center;">—</td>
+<td>The key in the <code>kwargs</code> dictionary that corresponds to the stochastic variable</td>
+</tr>
+<tr class="odd">
+<td><code>realizations</code></td>
+<td>numpy array</td>
+<td style="text-align: center;">-</td>
+<td>The matrix of realizations of the uncertain parameters used to approximate the cost.</td>
+</tr>
+<tr class="even">
+<td><code>nDesign</code></td>
+<td>int</td>
+<td style="text-align: center;"><code>25</code></td>
+<td>The number of realizations used as pivots in the algorithm. <br></td>
+</tr>
+<tr class="odd">
+<td><code>alpha_criterion</code></td>
+<td>float</td>
+<td style="text-align: center;"><code>95</code></td>
+<td>The quantile used in the definition of the cost functions. <br></td>
+</tr>
+<tr class="even">
+<td><code>nCV</code></td>
+<td>int</td>
+<td style="text-align: center;"><code>0</code></td>
+<td>The number of extra candidate to be sampled from the convex hull <br></td>
+</tr>
+<tr class="odd">
+<td><code>maxIterCV</code></td>
+<td>int</td>
+<td style="text-align: center;"><code>0</code></td>
+<td>The number of convex-hull associated trials to improve the solution <br></td>
+</tr>
+<tr class="even">
+<td><code>m</code></td>
+<td>int</td>
+<td style="text-align: center;"><code>5</code></td>
+<td>The number of best solution to be retained before a convex-hull operation is attempted. <br></td>
+</tr>
+<tr class="odd">
+<td><code>maxIter</code></td>
+<td>int</td>
+<td style="text-align: center;"><code>20</code></td>
+<td>Number of iterations of the determinisitc solver for the first instance of uncertainty. <br></td>
+</tr>
+<tr class="even">
+<td><code>maxIter_low</code></td>
+<td>int</td>
+<td style="text-align: center;"><code>5</code></td>
+<td>Number of iterations of the determinisitc solver for the remaining instances of uncertainty. <br></td>
+</tr>
+</tbody>
+</table>
+<p>Once an element of the class is instantiated, it is possible to call its <code>solve</code> method to solve the targeted stochastic optimization problem:</p>
+</section>
+<section id="the-solve-method-of-stochasticgradoptimizer" class="level3">
+<h3 class="anchored" data-anchor-id="the-solve-method-of-stochasticgradoptimizer">The solve method of <code>StochasticGradOptimizer</code></h3>
+<p>Here again, the stochastic optimization problem is solved by calling the <code>solve</code> method of the <code>StochasticGradOptimizer</code> class.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>parameter</th>
+<th>Type of value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x0</code></td>
+<td>ndarray</td>
+<td>The initial guess</td>
+</tr>
+<tr class="even">
+<td><code>kwargs</code></td>
+<td>dictionary</td>
+<td>The dictionary of arguments used in the cost and the gradient functions</td>
+</tr>
+<tr class="odd">
+<td><code>epsG</code></td>
+<td>float</td>
+<td>Stopping threshold on the norm of the gradient</td>
+</tr>
+<tr class="even">
+<td><code>display</code></td>
+<td>boolean</td>
+<td>Whether to print intermiediate results or not</td>
+</tr>
+<tr class="odd">
+<td><code>criterion</code></td>
+<td>str</td>
+<td>one of {expectation, var, cvar} defining the criterion to be minimized</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returned-solution" class="level3">
+<h3 class="anchored" data-anchor-id="returned-solution">Returned solution</h3>
+<p>The <code>solve</code> method of the <code>StochasticGradOptimizer</code> class returns a dictionary with the following keys and values:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 67%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dictionary key</th>
+<th>Type of value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>xopt</code></td>
+<td>ndarray</td>
+<td>The best solution found</td>
+</tr>
+<tr class="even">
+<td><code>fopt</code></td>
+<td>float</td>
+<td>The corresponding best cost function value</td>
+</tr>
+<tr class="odd">
+<td><code>cpu</code></td>
+<td>float</td>
+<td>The computation time of the stochastic algorithm.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-of-use" class="level3">
+<h3 class="anchored" data-anchor-id="example-of-use">Example of use</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mizoGrad <span class="im">import</span> StochasticGradOptimizer, dicGradDefault</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the problem, cost, grandient and uncertainty generator.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>xc <span class="op">=</span> np.array([<span class="fl">0.0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.25</span>, <span class="fl">1.5</span>])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>phix <span class="op">=</span> <span class="kw">lambda</span> x: np.<span class="bu">sum</span>((x <span class="op">-</span> xc) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>phip <span class="op">=</span> <span class="kw">lambda</span> p: np.<span class="bu">sum</span>((p<span class="op">-</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>gradPhix <span class="op">=</span> <span class="kw">lambda</span> x: <span class="dv">2</span><span class="op">*</span>(x <span class="op">-</span> xc)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># The cost function</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cost(x, p, lam, rho):</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.array(x)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> np.array(p)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> phix(x) <span class="op">+</span> rho <span class="op">*</span> phip(p) <span class="op">*</span> np.exp(<span class="op">-</span>lam <span class="op">*</span> phix(x))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> v</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># The gradient of the cost function</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad(x, p, lam, rho):</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.array(x)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> np.array(p)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">1</span><span class="op">-</span>lam <span class="op">*</span> rho <span class="op">*</span> phip(p)<span class="op">*</span> np.exp(<span class="op">-</span>lam <span class="op">*</span> phix(x))) <span class="op">*</span> gradPhix(x)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Function that generates a list of random realizations</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_p_samples(nSamples<span class="op">=</span><span class="dv">1</span>, pnom<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>), sig<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> np.array([pnom <span class="op">+</span> sig <span class="op">*</span> np.random.randn(<span class="dv">2</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(nSamples)])</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> P</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the algorithm parameters</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>nx <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>x_upper <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>sigma0 <span class="op">=</span> <span class="fl">0.35</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>kwargs <span class="op">=</span> <span class="bu">dict</span>(lam<span class="op">=</span><span class="fl">0.5</span>, rho<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span> <span class="co"># used in the design</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>nTest <span class="op">=</span> <span class="dv">100000</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>nDesign <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Choice of the criterion</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co"># possible values are ['expectation', 'var', 'cvar']</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> <span class="st">'cvar'</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>xmin <span class="op">=</span> np.array([<span class="op">-</span>x_upper] <span class="op">*</span> nx)</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> np.array([x_upper] <span class="op">*</span> nx)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>Ptest <span class="op">=</span> generate_p_samples(nSamples<span class="op">=</span>nTest, sig<span class="op">=</span>sigma0)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sigma_train <span class="kw">in</span> [<span class="dv">0</span>, <span class="fl">0.35</span>]:</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    x0 <span class="op">=</span> xmin <span class="op">+</span> np.random.rand(nx) <span class="op">*</span> (xmax <span class="op">-</span> xmin)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    realizations <span class="op">=</span> generate_p_samples(nSamples<span class="op">=</span>N, sig<span class="op">=</span>sigma_train)</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the dictionary for GradOptimizer</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Download the dafault arguments then update with mandatory ones</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    dicGrad <span class="op">=</span> dicGradDefault</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    dicGrad.update(</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>        <span class="bu">dict</span>(</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            f<span class="op">=</span>cost,</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>            g<span class="op">=</span>grad,</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>            nx<span class="op">=</span>nx,</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>            xmin<span class="op">=</span>xmin,</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>            xmax<span class="op">=</span>xmax,</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    sgo <span class="op">=</span> StochasticGradOptimizer(dicGradOptimizer<span class="op">=</span>dicGrad,</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>                                  realizations<span class="op">=</span>realizations,</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>                                  key<span class="op">=</span><span class="st">'p'</span>,</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>                                  nDesign<span class="op">=</span>nDesign,</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>                                  )</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    t0 <span class="op">=</span> time()</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    dR <span class="op">=</span> sgo.solve(x0,</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                   kwargs,</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                   display<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                   epsG<span class="op">=</span><span class="fl">1e-10</span>,</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>                   criterion<span class="op">=</span>criterion)</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>    cpu <span class="op">=</span> time() <span class="op">-</span> t0</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Results when learning using sigma = </span><span class="sc">{</span>sigma_train<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'achieved </span><span class="sc">{</span>criterion<span class="sc">}</span><span class="ss"> cost on working data = </span><span class="sc">{</span>dR[<span class="st">"fopt"</span>]<span class="sc">:2.3f}</span><span class="ss">  | cpu = </span><span class="sc">{</span>cpu<span class="sc">:2.2f}</span><span class="ss">'</span>)</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    perf <span class="op">=</span> sgo.global_cost(dR[<span class="st">'xopt'</span>], kwargs, Ptest, criterion<span class="op">=</span>criterion)</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'achieved cost on test data = </span><span class="sc">{</span>perf<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'-----'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This results in the following output</p>
+<pre class="terminal"><code>Results when learning using sigma = 0
+achieved cvar cost on working data = 0.000  | cpu = 0.49
+achieved cost on test data = 48.49123245004931
+-----
+Results when learning using sigma = 0.35
+achieved cvar cost on working data = 8.348  | cpu = 0.51
+achieved cost on test data = 8.377288795786622</code></pre>
+<p>Where it can be seen that solving the problem using the most expected value of the parameters lead to a quite risky solution given the disperstion of the parameters.</p>
+</section>
+</section>
 <section id="citing" class="level2">
-<h2 class="anchored" data-anchor-id="citing">Citing mizoGrad</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">@misc</span>{<span class="ot">alamir2026nonlinearmodelpredictivecontrol</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>      <span class="dt">title</span>={A Nonlinear Model Predictive Control Perspective on Gradient-Based Optimization: A New Efficient, Parameter-Free and Provably Stable Algorithm}, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>      <span class="dt">author</span>={Mazen Alamir},</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">year</span>={2026},</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">eprint</span>={2607.14600},</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">archivePrefix</span>={arXiv},</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">primaryClass</span>={cs.CE},</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">url</span>={https://arxiv.org/abs/2607.14600}, </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h2 class="anchored" data-anchor-id="citing">Citing mizoGrad (Deterministic Version)</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">@misc</span>{<span class="ot">alamir2026_det_nonlinearmodelpredictivecontrol</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>      <span class="dt">title</span>={A Nonlinear Model Predictive Control Perspective on Gradient-Based Optimization: A New Efficient, Parameter-Free and Provably Stable Algorithm}, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="dt">author</span>={Mazen Alamir},</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">year</span>={2026},</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">eprint</span>={2607.14600},</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">archivePrefix</span>={arXiv},</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">primaryClass</span>={cs.CE},</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">url</span>={https://arxiv.org/html/2607.14600}, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="citing" class="level2">
+<h2 class="anchored" data-anchor-id="citing">Citing mizoGrad (Stochastic Version)</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bibtex code-with-copy"><code class="sourceCode bibtex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">@misc</span>{<span class="ot">alamir2026_stoch_nonlinearmodelpredictivecontrol</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      <span class="dt">title</span>={A Unified Efficient Gradient-Based Heuristic For Box-Constrained Expectation-Related and Risk-Averse Stochastic Optimization Problems}, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>      <span class="dt">author</span>={Mazen Alamir},</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">year</span>={2026},</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">eprint</span>={2609.07427},</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">archivePrefix</span>={arXiv},</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">primaryClass</span>={cs.CE},</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">url</span>={http://arxiv.org/abs/2609.07427}, </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -617,7 +939,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The above reference contains a detailed description of the algorithm together with an extensive comparison with the best available alternatives. It also shows an example of application for very fast NMPC feedback implementation.</p>
+<p>The above references contain a detailed description of the algorithm together with an extensive comparison with the best available alternatives. It also shows an example of application for very fast NMPC feedback implementation.</p>
 </div>
 </div>
 

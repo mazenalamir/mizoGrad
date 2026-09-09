@@ -11,14 +11,10 @@ website:
         text: Home
       - href: index.qmd#problem
         text: "Problem"
-      - href: index.qmd#features
-        text: "Features"
-      - href: index.qmd#syntax
-        text: "Syntax"
-      - href: index.qmd#example
-        text: "Example of use"
-      - href: index.qmd#acceleration
-        text: "Acceleration"
+      - href: index.qmd#deterministic
+        text: "Determinisitic version"
+      - href: index.qmd#stochastic
+        text: "Stochastic version"
       - href: index.qmd#citing
         text: "Cite mizoGrad"
 
