@@ -11,6 +11,15 @@ keywords: ["Optimization", "First order methods", "Gradient-based", "Box Constra
 
 ---
 
+## Installation 
+
+This package can be installed using one of the following instructions 
+
+```python 
+uv add mizoGrad 
+pip install mizoGrad 
+```
+
 ## Problem Statement {#problem}
 
 `mizoGrad` is a python module that implements **Gradient-Based** solution to the following box-constrained optimization problems:

@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "mizoGrad",
+    "section": "Installation",
+    "text": "Installation\nThis package can be installed using one of the following instructions\nuv add mizoGrad \npip install mizoGrad"
+  },
+  {
     "objectID": "index.html#problem",
     "href": "index.html#problem",
     "title": "mizoGrad",
