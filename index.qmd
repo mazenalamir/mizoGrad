@@ -36,7 +36,7 @@ In its deterministic version, the dictionary of parameters kwargs is given and a
 
 ### Stochastic version 
 
-In the stochastic version, the fields associated to the `key` used in the instantiation of the solver is uncertain and hence, different formulation of a constrained stochastic optimization problems can be defined, namely: 
+In the stochastic version, the fields associated to the `key` used in the instantiation of the solver is uncertain and hence, different formulations of a constrained stochastic optimization problems can be defined, namely: 
 
 - `Expectation`-related: where the cost function is the expectation of the cost 
 
@@ -47,7 +47,7 @@ In the stochastic version, the fields associated to the `key` used in the instan
 :::{.callout-tip title="Deterministic version is used in the stochastic version"}
 It is important to notice that the stochastic version of the algorithm leverages the acceleration features included in the determinisitc approach. This means that understanding the deterministic version's parameters and options is mandatory for a better use of the stochastic version. 
 
-In the next sections, the deterministiv version is first introduced before its use in the stochastic version is discussed. 
+In the next sections, the deterministic version is first introduced before its use in the stochastic version is discussed. 
 :::
 
 ## The `GradOptimizer` class  {#deterministic}
@@ -56,7 +56,7 @@ This class implements the deterministic version and it is then used also in the 
 
 ### Algorithm features {#features}
 
-The Gradient-based algorithm used in the `mizoGrad` module is fully described in the [paper](https://arxiv.org/abs/2607.14600). This section just highlights some main features that distinguishes it from existing alternatives. 
+The Gradient-based algorithm used in the `mizoGrad` module is fully described in this  [paper](https://arxiv.org/abs/2607.14600). This section just highlights some main features that distinguishes it from existing alternatives. 
 
 The algorithm uses three main mechanisms that makes it outstanding, namely: 
 
@@ -76,18 +76,18 @@ This is schematically shown in the following Figures:
 
 
 :::{.callout-important title="Provable convergence"}
-Despite the use of both line search on the gradient direction and acceleration step, the algorithm is **proved to asymptotically converges** to a point that meets the KKT optimality condition (see the proof in the [reference paper](https://arxiv.org/abs/2607.14600)).
+Despite the use of both line search on the gradient direction the and acceleration path, the algorithm is **proved to asymptotically converges** to a point that meets the KKT optimality condition (see the proof in the [reference paper](https://arxiv.org/abs/2607.14600)).
 :::
 
 ### Syntax of use {#syntax}
 
-In order to use the module, the user need to provide three **mandatory arguments*, namely:
+In order to use the module, the user need to provide three **mandatory arguments**, namely:
 
 - The python function for the cost function 
 - The python function for its gradient 
 - The number of decision variables. 
 
-All the other parameters corresponds to some default values. In particular, if non `xmin` and `xmax` arguments are provided, the problem is considered to be unconstrained. 
+All the other parameters corresponds to some default values. In particular, if no `xmin` and `xmax` arguments are provided, the problem is considered to be unconstrained. 
 
 The following section provides the full list of input arguments 
 
@@ -96,7 +96,7 @@ The following section provides the full list of input arguments
 The following list of arguments are used in the instantiation of `GradOptimizer` class. An instance of this class possesses a `solve` method that enables to solve the above mentioned problem @eq-problem.
 
 :::{.callout-warning title="Order of the decision variable in f and g"}
-Please notice that it is mandatory that **decision variable appears as the first argument in the formal definition of the cost function**.
+Please notice that it is mandatory that the **decision variable appears as the first argument in the formal definition of the cost function**.
 :::
 
 :::{.tbl-caption}
@@ -105,9 +105,9 @@ Please notice that it is mandatory that **decision variable appears as the first
 | `f` |  The python function that provides the cost function. This function might need the value of some dictionary of parameters so that the generic call is `f(x, **kwargs)` where `kwargs` is a dictionary (see the example below)| --|
 | `g`| The python function that provides the gradient of the function. Similarly to the cost function This function might need the value of some dictionary of parameters so that the generic call is `f(x, **kwargs)` where `kwargs` is a dictionary (see the example below) | -- |
 | `nx`| The number of decision variable (dimension of `x`) | -- |
-| `xmin`| The lower bound on the vector of decition variable | `[-inf] * nx` |
-| `xmax`| The upper bound on the vector of decition variable | `[+inf] * nx` |
-| `ng`| The integer representing the number of adaptive grid for the line searched. As a matter of fact, the line search along the gradient line involves `ng+2` grid-points while the line search on the acceleration path uses `ng+1`. (See the reference for more details and this is so) | `5` |
+| `xmin`| The lower bounds on the vector of decision variable | `[-inf] * nx` |
+| `xmax`| The upper bounds on the vector of decision variable | `[+inf] * nx` |
+| `ng`| The integer representing the number of adaptive grid for the search lines. As a matter of fact, the line search along the gradient line involves `ng+2` grid-points while the line search on the acceleration path uses `ng+1`. (See the reference for more details and this is so) | `5` |
 | `alpha_min`| The initial value of the exponent of the smallest step on the gradient search, the default value means that the initial adaptable smallest step is $10^{-8}$. Notice that this is the smallest *adaptable* step size but not necessarily the smallest candidate step. This is because the `eta<1/(2L)` value (see below) is always there without change.  | `-8` |
 | `alpha_max`| The initial value of the exponent of the largest step on the gradient search, the default value means that the initial adaptable largest step is $1$. **The values of the last two arguments are updated according to trust region-like mechanism** | `0` |
 | `fast_min`| The smallest step along the acceleration line (no adaptation)| `-0.2` |
@@ -139,9 +139,9 @@ The solver returns a dictionary with the following fields:
 | `xopt` |  The optimal solution found $\in \mathbb R^{n_x}$ | 
 | `fopt`| The corresponding optimal value of the cost function | 
 | `normG`| The norm of the gradient at the solution  |
-| `lesalpha_min`| The history of the smallest exponents during the iterations | 
-| `lesalpha_max`| The history of the largest exponents during the iterations  | 
-| `traj`| The history of the cost function values during the iteration | 
+| `lesalpha_min`| The history of the smallest exponent during the iterations | 
+| `lesalpha_max`| The history of the largest exponent during the iterations  | 
+| `traj`| The history of the cost function values during the iterations | 
 | `traj_c`| The history of the acceleration step size  during the iterations|
 
 
@@ -158,8 +158,6 @@ import numpy as np
 from mizoGrad import GradOptimizer
 from time import time
 
-#from SaA import GradOptimizer
-
 np.set_printoptions(formatter={'float': lambda x: "{0:0.4f}".format(x)})
 
 # Define the cost function and the gradient
@@ -170,7 +168,7 @@ def cost(x, a=10, b=2, m=1):
     return f
 
 def cost_gradient(x, a=10, b=2, m=1):
-    term = 4 * np.power((x[0]-a)*x[1] + b * x[2] ** 3, 2*m-1)
+    term = 2 * m * np.power((x[0]-a)*x[1] + b * x[2] ** 3, 2*m-1)
     g = np.array([
         term * x[1],
         term * (x[0]-a),
@@ -247,13 +245,13 @@ cpu =  0.0008881092071533203
 ### Acceleration {#acceleration}
 
 :::{.callout-tip title="Acceleration of the function and gradient call"}
-Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (**Nonlinear Model Predictive Control** / **Moving-Horizon Estimation**), you might want to accelerate the evaluation of these function through compiled version of `CasaDi`.
+Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (**Nonlinear Model Predictive Control** / **Moving-Horizon Estimation**), you might want to accelerate the evaluation of these function through compiled versions which are possible to produce using some dedicated option of the `CasaDi`s FUNCTION.
 :::
 
 ## The `StochasticGradOptimizer` class {#stochastic}
 
-The basic class `StochasticGradOptimizer` is a child class of the previous one and is described in detail in this [paper](http://arxiv.org/abs/2609.07427). As such, all the input argument described above are 
-also needed for this class in addition to some more arguments that controls the 
+The basic class `StochasticGradOptimizer` is a child class of the previous one and is described in detail in this [paper](http://arxiv.org/abs/2609.07427). As such, all the input arguments described above are 
+also needed for this class in addition to some more arguments that control the 
 way the stochastic aspect of the problem is handled. This is the reason why for the sake of convenience, the dictionary 
 containing the default values that might be used in the call can be obtained through the command: 
 
@@ -291,7 +289,7 @@ are described in the following section.
 | `alpha_criterion`  | float       |  `95`   | The quantile used in the definition of the cost functions.     <br/>                                   |
 | `nCV`              | int         |   `0`   | The number of extra candidate to be sampled from the convex hull    <br/>                              |
 | `maxIterCV`        | int         |   `0`   | The number of convex-hull associated trials to improve the solution     <br/>                          |
-| `m`                | int         |   `5`   | The number of best solution to be retained before a convex-hull operation is attempted.     <br/>      |
+| `m`                | int         |   `5`   | The number of best solutions to be retained before a convex-hull operation is attempted.     <br/>      |
 | `maxIter`          | int         |  `20`   | Number of iterations of the determinisitc solver for the first instance of uncertainty.     <br/>      |
 | `maxIter_low`      | int         |   `5`   | Number of iterations of the determinisitc solver for the remaining instances of uncertainty.     <br/> |
 
@@ -358,7 +356,7 @@ def generate_p_samples(nSamples=1, pnom=(1, 1), sig=0):
     P = np.array([pnom + sig * np.random.randn(2) for _ in range(nSamples)])
     return P
 
-# Define the algorithm parameters
+# Define the algorithm's parameters
 
 nx = 6
 x_upper = 5

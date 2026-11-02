@@ -283,7 +283,7 @@ window.Quarto = {
 </section>
 <section id="stochastic-version" class="level3">
 <h3 class="anchored" data-anchor-id="stochastic-version">Stochastic version</h3>
-<p>In the stochastic version, the fields associated to the <code>key</code> used in the instantiation of the solver is uncertain and hence, different formulation of a constrained stochastic optimization problems can be defined, namely:</p>
+<p>In the stochastic version, the fields associated to the <code>key</code> used in the instantiation of the solver is uncertain and hence, different formulations of a constrained stochastic optimization problems can be defined, namely:</p>
 <ul>
 <li><p><code>Expectation</code>-related: where the cost function is the expectation of the cost</p></li>
 <li><p><code>Value-at-Risk (VaR)</code>: where the cost function to be minimized is defined as the <span class="math inline">\(\alpha\)</span>-quantile of the cost function <span class="math inline">\(f(x,p)\)</span>.</p></li>
@@ -300,7 +300,7 @@ Deterministic version is used in the stochastic version
 </div>
 <div class="callout-body-container callout-body">
 <p>It is important to notice that the stochastic version of the algorithm leverages the acceleration features included in the determinisitc approach. This means that understanding the deterministic version’s parameters and options is mandatory for a better use of the stochastic version.</p>
-<p>In the next sections, the deterministiv version is first introduced before its use in the stochastic version is discussed.</p>
+<p>In the next sections, the deterministic version is first introduced before its use in the stochastic version is discussed.</p>
 </div>
 </div>
 </section>
@@ -310,7 +310,7 @@ Deterministic version is used in the stochastic version
 <p>This class implements the deterministic version and it is then used also in the stochastic version. The following section describes the main features of the deterministic algorithm that explains its high performance compared to other gradient-based algorithms.</p>
 <section id="features" class="level3">
 <h3 class="anchored" data-anchor-id="features">Algorithm features</h3>
-<p>The Gradient-based algorithm used in the <code>mizoGrad</code> module is fully described in the <a href="https://arxiv.org/abs/2607.14600">paper</a>. This section just highlights some main features that distinguishes it from existing alternatives.</p>
+<p>The Gradient-based algorithm used in the <code>mizoGrad</code> module is fully described in this <a href="https://arxiv.org/abs/2607.14600">paper</a>. This section just highlights some main features that distinguishes it from existing alternatives.</p>
 <p>The algorithm uses three main mechanisms that makes it outstanding, namely:</p>
 <ul>
 <li>The use of line search along the gradient line which is defined through a specific adaptable grid.</li>
@@ -345,20 +345,20 @@ Provable convergence
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Despite the use of both line search on the gradient direction and acceleration step, the algorithm is <strong>proved to asymptotically converges</strong> to a point that meets the KKT optimality condition (see the proof in the <a href="https://arxiv.org/abs/2607.14600">reference paper</a>).</p>
+<p>Despite the use of both line search on the gradient direction the and acceleration path, the algorithm is <strong>proved to asymptotically converges</strong> to a point that meets the KKT optimality condition (see the proof in the <a href="https://arxiv.org/abs/2607.14600">reference paper</a>).</p>
 </div>
 </div>
 </section>
 </section>
 <section id="syntax" class="level3">
 <h3 class="anchored" data-anchor-id="syntax">Syntax of use</h3>
-<p>In order to use the module, the user need to provide three **mandatory arguments*, namely:</p>
+<p>In order to use the module, the user need to provide three <strong>mandatory arguments</strong>, namely:</p>
 <ul>
 <li>The python function for the cost function</li>
 <li>The python function for its gradient</li>
 <li>The number of decision variables.</li>
 </ul>
-<p>All the other parameters corresponds to some default values. In particular, if non <code>xmin</code> and <code>xmax</code> arguments are provided, the problem is considered to be unconstrained.</p>
+<p>All the other parameters corresponds to some default values. In particular, if no <code>xmin</code> and <code>xmax</code> arguments are provided, the problem is considered to be unconstrained.</p>
 <p>The following section provides the full list of input arguments</p>
 <section id="input-arguments" class="level4">
 <h4 class="anchored" data-anchor-id="input-arguments">Input arguments</h4>
@@ -373,7 +373,7 @@ Order of the decision variable in f and g
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please notice that it is mandatory that <strong>decision variable appears as the first argument in the formal definition of the cost function</strong>.</p>
+<p>Please notice that it is mandatory that the <strong>decision variable appears as the first argument in the formal definition of the cost function</strong>.</p>
 </div>
 </div>
 <div class="tbl-caption">
@@ -409,17 +409,17 @@ Order of the decision variable in f and g
 </tr>
 <tr class="even">
 <td><code>xmin</code></td>
-<td>The lower bound on the vector of decition variable</td>
+<td>The lower bounds on the vector of decision variable</td>
 <td style="text-align: right;"><code>[-inf] * nx</code></td>
 </tr>
 <tr class="odd">
 <td><code>xmax</code></td>
-<td>The upper bound on the vector of decition variable</td>
+<td>The upper bounds on the vector of decision variable</td>
 <td style="text-align: right;"><code>[+inf] * nx</code></td>
 </tr>
 <tr class="even">
 <td><code>ng</code></td>
-<td>The integer representing the number of adaptive grid for the line searched. As a matter of fact, the line search along the gradient line involves <code>ng+2</code> grid-points while the line search on the acceleration path uses <code>ng+1</code>. (See the reference for more details and this is so)</td>
+<td>The integer representing the number of adaptive grid for the search lines. As a matter of fact, the line search along the gradient line involves <code>ng+2</code> grid-points while the line search on the acceleration path uses <code>ng+1</code>. (See the reference for more details and this is so)</td>
 <td style="text-align: right;"><code>5</code></td>
 </tr>
 <tr class="odd">
@@ -503,17 +503,17 @@ Order of the decision variable in f and g
 </tr>
 <tr class="even">
 <td><code>lesalpha_min</code></td>
-<td>The history of the smallest exponents during the iterations</td>
+<td>The history of the smallest exponent during the iterations</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr class="odd">
 <td><code>lesalpha_max</code></td>
-<td>The history of the largest exponents during the iterations</td>
+<td>The history of the largest exponent during the iterations</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr class="even">
 <td><code>traj</code></td>
-<td>The history of the cost function values during the iteration</td>
+<td>The history of the cost function values during the iterations</td>
 <td style="text-align: right;"></td>
 </tr>
 <tr class="odd">
@@ -533,69 +533,67 @@ Order of the decision variable in f and g
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mizoGrad <span class="im">import</span> GradOptimizer</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> time</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#from SaA import GradOptimizer</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(formatter<span class="op">=</span>{<span class="st">'float'</span>: <span class="kw">lambda</span> x: <span class="st">"</span><span class="sc">{0:0.4f}</span><span class="st">"</span>.<span class="bu">format</span>(x)})</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>np.set_printoptions(formatter<span class="op">=</span>{<span class="st">'float'</span>: <span class="kw">lambda</span> x: <span class="st">"</span><span class="sc">{0:0.4f}</span><span class="st">"</span>.<span class="bu">format</span>(x)})</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the cost function and the gradient</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the cost function and the gradient</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cost(x, a<span class="op">=</span><span class="dv">10</span>, b<span class="op">=</span><span class="dv">2</span>, m<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cost(x, a<span class="op">=</span><span class="dv">10</span>, b<span class="op">=</span><span class="dv">2</span>, m<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> np.power((x[<span class="dv">0</span>]<span class="op">-</span>a)<span class="op">*</span>x[<span class="dv">1</span>] <span class="op">+</span> b <span class="op">*</span> x[<span class="dv">2</span>] <span class="op">**</span> <span class="dv">3</span>, <span class="dv">2</span><span class="op">*</span>m)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cost_gradient(x, a<span class="op">=</span><span class="dv">10</span>, b<span class="op">=</span><span class="dv">2</span>, m<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    term <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> np.power((x[<span class="dv">0</span>]<span class="op">-</span>a)<span class="op">*</span>x[<span class="dv">1</span>] <span class="op">+</span> b <span class="op">*</span> x[<span class="dv">2</span>] <span class="op">**</span> <span class="dv">3</span>, <span class="dv">2</span><span class="op">*</span>m<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    g <span class="op">=</span> np.array([</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        term <span class="op">*</span> x[<span class="dv">1</span>],</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        term <span class="op">*</span> (x[<span class="dv">0</span>]<span class="op">-</span>a),</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        term <span class="op">*</span> (<span class="dv">3</span> <span class="op">*</span> b <span class="op">*</span> x[<span class="dv">2</span>] <span class="op">**</span> <span class="dv">2</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    ])</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> g</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> np.power((x[<span class="dv">0</span>]<span class="op">-</span>a)<span class="op">*</span>x[<span class="dv">1</span>] <span class="op">+</span> b <span class="op">*</span> x[<span class="dv">2</span>] <span class="op">**</span> <span class="dv">3</span>, <span class="dv">2</span><span class="op">*</span>m)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cost_gradient(x, a<span class="op">=</span><span class="dv">10</span>, b<span class="op">=</span><span class="dv">2</span>, m<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    term <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> m <span class="op">*</span> np.power((x[<span class="dv">0</span>]<span class="op">-</span>a)<span class="op">*</span>x[<span class="dv">1</span>] <span class="op">+</span> b <span class="op">*</span> x[<span class="dv">2</span>] <span class="op">**</span> <span class="dv">3</span>, <span class="dv">2</span><span class="op">*</span>m<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    g <span class="op">=</span> np.array([</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        term <span class="op">*</span> x[<span class="dv">1</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        term <span class="op">*</span> (x[<span class="dv">0</span>]<span class="op">-</span>a),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        term <span class="op">*</span> (<span class="dv">3</span> <span class="op">*</span> b <span class="op">*</span> x[<span class="dv">2</span>] <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> g</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>np.array([<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>])</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>np.array([<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>])</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>xmin <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">5</span>] <span class="op">*</span> <span class="bu">len</span>(x0))</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> np.array([<span class="op">+</span><span class="dv">5</span>] <span class="op">*</span> <span class="bu">len</span>(x0))</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>s2a <span class="op">=</span> GradOptimizer(</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    f<span class="op">=</span>cost,</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    g<span class="op">=</span>cost_gradient,</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    nx <span class="op">=</span> <span class="dv">3</span>,</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    xmin<span class="op">=</span>xmin,</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    xmax<span class="op">=</span>xmax,</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    ng<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    alpha_min<span class="op">=-</span><span class="dv">8</span>,</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    alpha_max<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    fast_min<span class="op">=-</span><span class="fl">0.2</span>,</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    fast_max<span class="op">=</span><span class="fl">1.0</span>,</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    rho_adapt<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    eta<span class="op">=</span><span class="fl">1e-16</span>,</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>xmin <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">5</span>] <span class="op">*</span> <span class="bu">len</span>(x0))</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> np.array([<span class="op">+</span><span class="dv">5</span>] <span class="op">*</span> <span class="bu">len</span>(x0))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>s2a <span class="op">=</span> GradOptimizer(</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    f<span class="op">=</span>cost,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    g<span class="op">=</span>cost_gradient,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    nx <span class="op">=</span> <span class="dv">3</span>,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    xmin<span class="op">=</span>xmin,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    xmax<span class="op">=</span>xmax,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    ng<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    alpha_min<span class="op">=-</span><span class="dv">8</span>,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    alpha_max<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    fast_min<span class="op">=-</span><span class="fl">0.2</span>,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    fast_max<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    rho_adapt<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    eta<span class="op">=</span><span class="fl">1e-16</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co"># set the dictionary argument used the cost function and gradient </span></span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># set the dictionary argument used the cost function and gradient </span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>kwargs <span class="op">=</span> <span class="bu">dict</span>(</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    a<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    b<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>kwargs <span class="op">=</span> <span class="bu">dict</span>(</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    a<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    b<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="co"># solve the problem</span></span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"># solve the problem</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time()</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> s2a.solve(x0<span class="op">=</span>x0, </span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>              kwargs<span class="op">=</span>kwargs, </span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>              maxIter<span class="op">=</span><span class="dv">20</span>, </span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>              epsG<span class="op">=</span><span class="fl">1e-8</span>, </span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>              display<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> time()</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> s2a.solve(x0<span class="op">=</span>x0, </span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>              kwargs<span class="op">=</span>kwargs, </span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>              maxIter<span class="op">=</span><span class="dv">20</span>, </span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>              epsG<span class="op">=</span><span class="fl">1e-8</span>, </span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>              display<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>cpu <span class="op">=</span> time()<span class="op">-</span>t1</span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>cpu <span class="op">=</span> time()<span class="op">-</span>t1</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'solution: '</span>, np.array(R[<span class="st">'xopt'</span>], dtype<span class="op">=</span><span class="bu">float</span>))</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'best cost : '</span>, cost(s2a.y, <span class="op">**</span>kwargs))</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'cpu = '</span>, cpu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'solution: '</span>, np.array(R[<span class="st">'xopt'</span>], dtype<span class="op">=</span><span class="bu">float</span>))</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'best cost : '</span>, cost(s2a.y, <span class="op">**</span>kwargs))</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'cpu = '</span>, cpu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which leads to the followning results:</p>
 <pre class="terminal"><code>value 9.374756801 normg=292.957 | alpha_min=-8.0 | alpha_max=-0.4
 value 3.931283917 normg=31.930 | alpha_min=-8.0 | alpha_max=-0.78
@@ -626,14 +624,14 @@ Acceleration of the function and gradient call
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (<strong>Nonlinear Model Predictive Control</strong> / <strong>Moving-Horizon Estimation</strong>), you might want to accelerate the evaluation of these function through compiled version of <code>CasaDi</code>.</p>
+<p>Notice that any acceleration in the computation process of the cost function and the gradient is naturally inherited by the algorithm. Consequently, for demanding optimization-based applications (<strong>Nonlinear Model Predictive Control</strong> / <strong>Moving-Horizon Estimation</strong>), you might want to accelerate the evaluation of these function through compiled versions which are possible to produce using some dedicated option of the <code>CasaDi</code>s FUNCTION.</p>
 </div>
 </div>
 </section>
 </section>
 <section id="stochastic" class="level2">
 <h2 class="anchored" data-anchor-id="stochastic">The <code>StochasticGradOptimizer</code> class</h2>
-<p>The basic class <code>StochasticGradOptimizer</code> is a child class of the previous one and is described in detail in this <a href="http://arxiv.org/abs/2609.07427">paper</a>. As such, all the input argument described above are also needed for this class in addition to some more arguments that controls the way the stochastic aspect of the problem is handled. This is the reason why for the sake of convenience, the dictionary containing the default values that might be used in the call can be obtained through the command:</p>
+<p>The basic class <code>StochasticGradOptimizer</code> is a child class of the previous one and is described in detail in this <a href="http://arxiv.org/abs/2609.07427">paper</a>. As such, all the input arguments described above are also needed for this class in addition to some more arguments that control the way the stochastic aspect of the problem is handled. This is the reason why for the sake of convenience, the dictionary containing the default values that might be used in the call can be obtained through the command:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mizoGrad <span class="im">import</span> dicGradDefault</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the default dictionary for the deterministic solver</span></span>
@@ -714,7 +712,7 @@ Acceleration of the function and gradient call
 <td><code>m</code></td>
 <td>int</td>
 <td style="text-align: center;"><code>5</code></td>
-<td>The number of best solution to be retained before a convex-hull operation is attempted. <br></td>
+<td>The number of best solutions to be retained before a convex-hull operation is attempted. <br></td>
 </tr>
 <tr class="odd">
 <td><code>maxIter</code></td>
@@ -844,7 +842,7 @@ Acceleration of the function and gradient call
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> np.array([pnom <span class="op">+</span> sig <span class="op">*</span> np.random.randn(<span class="dv">2</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(nSamples)])</span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> P</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the algorithm parameters</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the algorithm's parameters</span></span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>nx <span class="op">=</span> <span class="dv">6</span></span>
 <span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>x_upper <span class="op">=</span> <span class="dv">5</span></span>
