@@ -283,7 +283,7 @@ are described in the following section.
 | Parameter          | Type        | Default | Description                                                                                            |
 |--------------------|-------------|:-------:|--------------------------------------------------------------------------------------------------------|
 | `dicGradOptimizer` | dictionary  |    —    | Dictionary representing the input arguments of the deterministic version                               |
-| `key`              | str         |    —    | The key in the `kwargs` dictionary that corresponds to the stochastic variable. **In the present version** this key is expected to be precisely 'p'|
+| `key`              | str         |    —    | The key in the `kwargs` dictionary that corresponds to the stochastic variable.                        |
 | `realizations`     | numpy array |    -    | The matrix of realizations of the uncertain parameters used to approximate the cost.                   |
 | `nDesign`          | int         |  `25`   | The number of realizations used as pivots in the algorithm.     <br/>                                  |
 | `alpha_criterion`  | float       |  `95`   | The quantile used in the definition of the cost functions.     <br/>                                   |
